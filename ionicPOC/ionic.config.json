@@ -1,0 +1,8 @@
+{
+  "name": "ionicPOC",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
