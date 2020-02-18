@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <div slot="end">
+      <ion-title>Home Tab</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="card" button (click)="shouldExpand()">
+    
+    <img src="{{ expandableCard.terminalImageURL }}" alt="" />
+    <ion-card-header>
+      <ion-card-subtitle>Tap to expand/hide</ion-card-subtitle>
+      <ion-card-title>{{ expandableCard.terminalName }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div *ngIf="(!expanded)">{{ expandableCard.terminalDescription }}</div>
+      <div *ngIf="(expanded)">{{ expandableCard.terminalDescriptionExpanded }}</div>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-slides [options]="sliderConfig">
+    <ion-slide *ngFor="let card of cardData">
+        <ion-card>
+          <ion-card-header>
+            <!-- <ion-card-title > -->
+              <h3 style="margin-bottom: 20px !important;"> {{ card.terminalName }}</h3>
+            <!-- </ion-card-title> -->
+            <!-- <ion-card-content>
+              
+            </ion-card-content> -->
+          </ion-card-header>
+          <img src="{{card.terminalImageURL}}">
+        </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

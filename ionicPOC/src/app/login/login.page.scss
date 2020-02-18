@@ -1,0 +1,19 @@
+#rounded {
+    --border-color: #dbdbdb;
+    --border-radius: 15px;
+    --border-width: 1px;
+    // --box-shadow: 2px #dbdbdb;
+    --highlight-height: 0;
+    --background: #f8f8f8;
+    margin-bottom: 32px;
+}
+
+#rounded.ion-valid.item-has-focus {
+--border-color: var(--ion-color-success-shade);
+}
+
+#container {
+    padding-top: 72px;
+    width: 300px; 
+    margin: auto;
+}
