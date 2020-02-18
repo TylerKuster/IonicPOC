@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TabsPageModule } from './ionic/tabs/tabs.module';
 
 // import { TabsModule } from 'ngx-bootstrap/tabs';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { TabsPageModule } from './ionic/tabs/tabs.module';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    GoogleMaps
   ],
   bootstrap: [AppComponent]
 })

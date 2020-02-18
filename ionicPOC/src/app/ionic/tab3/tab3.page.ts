@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 
 // Import classes from maps module
-// import {
-//   GoogleMaps,
-//   GoogleMap,
-//   GoogleMapsEvent,
-//   LatLng,
-//   MarkerOptions,
-//   Marker
-// } from "@ionic-native/google-maps";
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  LatLng,
+  MarkerOptions,
+  Marker
+} from "@ionic-native/google-maps";
 
 import { Platform, NavController } from "@ionic/angular";
 
@@ -23,39 +23,39 @@ export class Tab3Page {
 
 	}
 
-  // ngAfterViewInit() {
+  ngAfterViewInit() {
 
-	// 	this.platform.ready().then( () => {
+		this.platform.ready().then( () => {
 
-	// 		this.loadMap();
-	// 	});
-  // }
+			this.loadMap();
+		});
+  }
   
-  // loadMap() {
+  loadMap() {
 
-  //   let map = GoogleMaps.create( 'map' );
+    let map = GoogleMaps.create( 'map' );
   
-  //   map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
+    map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
   
-  //     let coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
+      let coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
   
-  //     let position = {
-  //       target: coordinates,
-  //       zoom: 14
-  //     };
+      let position = {
+        target: coordinates,
+        zoom: 14
+      };
   
-  //     map.animateCamera( position );
+      map.animateCamera( position );
   
-  //     let markerOptions: MarkerOptions = {
-  //       position: coordinates,
-  //       icon: "assets/images/marker.png",
-  //       title: 'Hello California'
-  //     };
+      let markerOptions: MarkerOptions = {
+        position: coordinates,
+        icon: "assets/images/marker.png",
+        title: 'Hello California'
+      };
   
-  //     const marker = map.addMarker( markerOptions )
-  //     .then( ( marker: Marker ) => {
-  //       marker.showInfoWindow();
-  //     });
-  //   })
-  // }
+      const marker = map.addMarker( markerOptions )
+      .then( ( marker: Marker ) => {
+        marker.showInfoWindow();
+      });
+    })
+  }
 }
