@@ -62,30 +62,26 @@ export class Tab3Page {
     
         const marker = this.map.addMarker( markerOptions )
       })
-      // .then( ( marker: Marker ) => {
-      //   marker.showInfoWindow();
-      // });
     })
   }
 
   userLocation() {
     LocationService.getMyLocation().then((myLocation: MyLocation) => {
-
-      // let options: GoogleMapOptions = {
-      //   camera: {
-      //     target: myLocation.latLng
-      //   }
-      // };
-      console.log("maybe")
       let position = {
         target: myLocation.latLng,
-        zoom: 6,
-        tilt: 30
+        zoom: 18,
+        tilt: 60,
+        duration: 500
       };
   
-      this.map.animateCamera( position );
-      // this.map = GoogleMaps.create('map_canvas', options);
+      let markerOptions: MarkerOptions = {
+        position: position.target,
+        title: "My Location"
+      };
+  
+      const marker = this.map.addMarker( markerOptions )
 
+      this.map.animateCamera( position );
     });
   }
 }

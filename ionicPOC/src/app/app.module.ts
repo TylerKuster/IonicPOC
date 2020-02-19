@@ -12,6 +12,8 @@ import { TabsPageModule } from './ionic/tabs/tabs.module';
 
 // import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GoogleMaps } from '@ionic-native/google-maps';
+// import { Geolocation, GeolocationOriginal } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,8 +22,10 @@ import { GoogleMaps } from '@ionic-native/google-maps';
   providers: [
     StatusBar,
     SplashScreen,
+    // GeolocationOriginal,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    GoogleMaps
+    GoogleMaps,
+    Camera
   ],
   bootstrap: [AppComponent]
 })
