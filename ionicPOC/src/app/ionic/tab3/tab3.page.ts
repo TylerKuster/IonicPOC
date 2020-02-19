@@ -7,10 +7,14 @@ import {
   GoogleMapsEvent,
   LatLng,
   MarkerOptions,
-  Marker
+  MyLocation,
+  LocationService,
+  Marker,
+  GoogleMapOptions
 } from "@ionic-native/google-maps";
 
 import { Platform, NavController } from "@ionic/angular";
+import { MarkerService } from 'src/app/marker.service';
 
 @Component({
   selector: 'app-tab3',
@@ -18,44 +22,70 @@ import { Platform, NavController } from "@ionic/angular";
   styleUrls: ['./tab3.page.scss'],
 })
 export class Tab3Page {
+  map: GoogleMap
 
-  constructor( public platform: Platform, public nav: NavController ) {
+  markerData = []
+  constructor(
+    public platform: Platform, 
+    public nav: NavController,
+    private markerService: MarkerService
+    ) {
 
 	}
 
   ngAfterViewInit() {
 
+    this.markerData = this.markerService.getMarkers()
+
 		this.platform.ready().then( () => {
 
-			this.loadMap();
+      this.loadMap();
+      this.userLocation();
 		});
   }
   
   loadMap() {
 
-    let map = GoogleMaps.create( 'map' );
+    this.map = GoogleMaps.create( 'map' );
   
-    map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
+    this.map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
   
-      let coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
-  
-      let position = {
-        target: coordinates,
-        zoom: 14
-      };
-  
-      map.animateCamera( position );
-  
-      let markerOptions: MarkerOptions = {
-        position: coordinates,
-        icon: "assets/images/marker.png",
-        title: 'Hello California'
-      };
-  
-      const marker = map.addMarker( markerOptions )
-      .then( ( marker: Marker ) => {
-        marker.showInfoWindow();
-      });
+      this.markerData.forEach((pin, index) => {
+        let coords: LatLng = new LatLng( pin.markerLat, pin.markerLng );
+        
+        let markerOptions: MarkerOptions = {
+          position: coords,
+          icon: pin.markerIcon,
+          title: pin.markerTitle,
+          animation: 'DROP'
+        };
+    
+        const marker = this.map.addMarker( markerOptions )
+      })
+      // .then( ( marker: Marker ) => {
+      //   marker.showInfoWindow();
+      // });
     })
+  }
+
+  userLocation() {
+    LocationService.getMyLocation().then((myLocation: MyLocation) => {
+
+      // let options: GoogleMapOptions = {
+      //   camera: {
+      //     target: myLocation.latLng
+      //   }
+      // };
+      console.log("maybe")
+      let position = {
+        target: myLocation.latLng,
+        zoom: 6,
+        tilt: 30
+      };
+  
+      this.map.animateCamera( position );
+      // this.map = GoogleMaps.create('map_canvas', options);
+
+    });
   }
 }
